@@ -63,9 +63,28 @@
 
             let shape;
             if (currentShape === 'rectangle') {
-                shape = { type: 'rectangle', x, y, width: 100, height: 50 };
+                shape = {
+                    type: 'rectangle',
+                    x,
+                    y,
+                    width: 100,
+                    height: 50,
+                    scale: parseFloat(scaleInput.value),
+                    rotation: parseFloat(rotationInput.value),
+                    translateX: parseFloat(translateXInput.value),
+                    translateY: parseFloat(translateYInput.value)
+                };
             } else if (currentShape === 'circle') {
-                shape = { type: 'circle', x, y, radius: 50 };
+                shape = {
+                    type: 'circle',
+                    x,
+                    y,
+                    radius: 50,
+                    scale: parseFloat(scaleInput.value),
+                    rotation: parseFloat(rotationInput.value),
+                    translateX: parseFloat(translateXInput.value),
+                    translateY: parseFloat(translateYInput.value)
+                };
             }
 
             shapes.push(shape);
@@ -79,17 +98,13 @@
                 ctx.save();
 
                 // Aplicar traslación
-                const translateX = parseFloat(translateXInput.value);
-                const translateY = parseFloat(translateYInput.value);
-                ctx.translate(shape.x + translateX, shape.y + translateY);
+                ctx.translate(shape.x + shape.translateX, shape.y + shape.translateY);
 
                 // Aplicar rotación
-                const rotation = parseFloat(rotationInput.value);
-                ctx.rotate(rotation * Math.PI / 180);
+                ctx.rotate(shape.rotation * Math.PI / 180);
 
                 // Aplicar escalado
-                const scale = parseFloat(scaleInput.value);
-                ctx.scale(scale, scale);
+                ctx.scale(shape.scale, shape.scale);
 
                 // Dibujar la forma
                 ctx.beginPath();
@@ -115,5 +130,4 @@
     </script>
 </body>
 </html>
-
 
